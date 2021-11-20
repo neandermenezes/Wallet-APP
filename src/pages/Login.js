@@ -1,9 +1,112 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
+import { actionUserLogin } from '../actions/index';
+import Loading from '../ReactComponents/Loading';
+import BackgroundVideo from '../ReactComponents/Backgroundvideo';
 
+const timer = 1000;
 class Login extends React.Component {
+  constructor() {
+    super();
+    this.handleChange = this.handleChange.bind(this);
+    this.auth = this.auth.bind(this);
+    this.onButtonClick = this.onButtonClick.bind(this);
+
+    this.state = {
+      email: '',
+      password: '',
+      isButtonDisabled: true,
+      redirect: false,
+      passwordValidated: false,
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, timer);
+  }
+
+  onButtonClick() {
+    const { email } = this.state;
+    const { dispatchEmail } = this.props;
+    this.setState({ loading: true });
+    dispatchEmail(email);
+    this.setState({ redirect: true });
+  }
+
+  auth() {
+    const { email, password } = this.state;
+    const minPasswordLength = 6;
+
+    if (password.length >= minPasswordLength && email.includes('@' && '.com')) {
+      this.setState({ isButtonDisabled: false, passwordValidated: true });
+    } else this.setState({ isButtonDisabled: true, passwordValidated: false });
+  }
+
+  handleChange({ target: { name, value } }) {
+    this.setState({ [name]: value }, this.auth);
+  }
+
   render() {
-    return <div>Login</div>;
+    const { email, password, isButtonDisabled, redirect,
+      passwordValidated,
+      loading,
+    } = this.state;
+    const display = (
+      <div className="login">
+        <form action="#" className="form">
+          <h1 className="heading-primary">Trybe Wallet</h1>
+          <div className="form__group u-margin-top-big">
+            <input
+              placeholder="Email"
+              data-testid="email-input"
+              type="email"
+              className="form__input"
+              name="email"
+              onChange={ this.handleChange }
+              value={ email }
+            />
+          </div>
+          <div className="form__group">
+            <input
+              placeholder="Password"
+              data-testid="password-input"
+              type="password"
+              className={ passwordValidated ? 'form__input' : 'form__input--red' }
+              onChange={ this.handleChange }
+              name="password"
+              value={ password }
+            />
+          </div>
+          <div className="form__group">
+            <button
+              type="button"
+              disabled={ isButtonDisabled }
+              className={ isButtonDisabled ? 'btn btn--white' : 'btn btn--green' }
+              onClick={ this.onButtonClick }
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
+        <BackgroundVideo />
+      </div>
+    );
+    if (redirect) return <Redirect to="/carteira" />;
+    return loading ? <Loading /> : display;
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  dispatchEmail: (email) => dispatch(actionUserLogin(email)),
+});
+
+Login.propTypes = {
+  dispatchEmail: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
