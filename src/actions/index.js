@@ -3,6 +3,7 @@ import getCoins from '../services/api';
 // Coloque aqui suas actions
 export const USER_LOGIN = 'USER_LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const DELETE_ITEM = 'DELETE_ITEM';
 
 export const actionUserLogin = (email) => ({
   type: USER_LOGIN,
@@ -19,3 +20,8 @@ export const actionAddExpense = (obj) => async (dispatch) => {
   const finalObject = { ...obj, exchangeRates: result };
   dispatch(actionExpenses(finalObject));
 };
+
+export const actionDeleteItem = (obj) => ({
+  type: DELETE_ITEM,
+  obj,
+});

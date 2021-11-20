@@ -75,7 +75,7 @@ class FormExpenses extends React.Component {
             onChange={ handleChange }
             data-testid="currency-input"
           >
-            {currencies.map((curr) => (
+            {currencies === undefined ? null : currencies.map((curr) => (
               <option key={ curr } data-testid={ curr } value={ curr }>
                 {curr}
               </option>
