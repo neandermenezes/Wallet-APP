@@ -37,11 +37,12 @@ class FormExpenses extends React.Component {
 
   async submitForm() {
     const { id } = this.state;
-    const { expenses } = this.props;
+    const { dispatchExpenses } = this.props;
+
     let expense = this.state;
     expense = { ...expense, id };
     this.setState((prev) => ({ id: prev.id + 1 }));
-    expenses(expense);
+    dispatchExpenses(expense);
   }
 
   display() {
@@ -118,11 +119,11 @@ class FormExpenses extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  expenses: (obj) => dispatch(actionAddExpense(obj)),
+  dispatchExpenses: (obj) => dispatch(actionAddExpense(obj)),
 });
 
 FormExpenses.propTypes = {
-  expenses: PropTypes.func.isRequired,
+  dispatchExpenses: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(FormExpenses);
