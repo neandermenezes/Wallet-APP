@@ -16,6 +16,7 @@ export const actionExpenses = (expenses) => ({
 
 export const actionAddExpense = (obj) => async (dispatch) => {
   const result = await getCoins();
+  delete result.USDT;
   console.log(result);
   const finalObject = { ...obj, exchangeRates: result };
   dispatch(actionExpenses(finalObject));
