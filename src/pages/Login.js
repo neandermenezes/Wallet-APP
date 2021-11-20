@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import { actionUserLogin } from '../actions/index';
-import Loading from '../ReactComponents/Loading';
 import BackgroundVideo from '../ReactComponents/Backgroundvideo';
 
-const timer = 1000;
 class Login extends React.Component {
   constructor() {
     super();
@@ -20,20 +18,12 @@ class Login extends React.Component {
       isButtonDisabled: true,
       redirect: false,
       passwordValidated: false,
-      loading: true,
     };
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, timer);
   }
 
   onButtonClick() {
     const { email } = this.state;
     const { dispatchEmail } = this.props;
-    this.setState({ loading: true });
     dispatchEmail(email);
     this.setState({ redirect: true });
   }
@@ -53,9 +43,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, isButtonDisabled, redirect,
-      passwordValidated,
-      loading,
-    } = this.state;
+      passwordValidated } = this.state;
     const display = (
       <div className="login">
         <form action="#" className="form">
@@ -97,7 +85,7 @@ class Login extends React.Component {
       </div>
     );
     if (redirect) return <Redirect to="/carteira" />;
-    return loading ? <Loading /> : display;
+    return display;
   }
 }
 
