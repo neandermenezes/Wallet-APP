@@ -1,3 +1,23 @@
 body {
   box-sizing: border-box;
 }
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.table__box {
+  display: flex;
+}
+
+.table__box:not(:last-of-type) {
+  margin-bottom: 4rem;
+}
+
+.table__item {
+  padding: 1rem;
+  text-decoration: none;
+  list-style: none;
+}
