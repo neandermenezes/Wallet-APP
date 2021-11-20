@@ -12,13 +12,13 @@ class FormExpenses extends React.Component {
     this.fetchCoins = this.fetchCoins.bind(this);
 
     this.state = {
-      value: '',
-      description: '',
+      id: 0,
+      value: 0,
       currency: 'USD',
-      currencies: ['USD'],
       method: 'Dinheiro',
       tag: 'Alimentação',
-      id: 0,
+      description: '',
+      currencies: [],
     };
   }
 
@@ -28,6 +28,7 @@ class FormExpenses extends React.Component {
 
   async fetchCoins() {
     const coins = await getCoins();
+    delete coins.USDT;
     this.setState({ currencies: Object.keys(coins) });
   }
 
@@ -41,7 +42,7 @@ class FormExpenses extends React.Component {
 
     let expense = this.state;
     expense = { ...expense, id };
-    this.setState((prev) => ({ id: prev.id + 1 }));
+    this.setState((prev) => ({ id: prev.id + 1, value: 0 }));
     dispatchExpenses(expense);
   }
 
@@ -66,18 +67,21 @@ class FormExpenses extends React.Component {
           name="description"
           data-testid="description-input"
         />
-        <select
-          placeholder="moeda"
-          name="currency"
-          onChange={ handleChange }
-          data-testid="currency-input"
-        >
-          {currencies.map((curr) => (
-            <option key={ curr } value={ curr }>
-              {curr}
-            </option>
-          ))}
-        </select>
+        <label htmlFor="moeda">
+          Moeda
+          <select
+            id="moeda"
+            name="currency"
+            onChange={ handleChange }
+            data-testid="currency-input"
+          >
+            {currencies.map((curr) => (
+              <option key={ curr } data-testid={ curr } value={ curr }>
+                {curr}
+              </option>
+            ))}
+          </select>
+        </label>
       </>
     );
   }

@@ -19,10 +19,13 @@ class Header extends React.Component {
   calculateExpenses() {
     const { totalMoney } = this.props;
     const { expenses } = this.state;
-    const newExpenses = totalMoney.reduce(
-      (acc, curr) => parseInt(curr.value, 10) + acc,
-      0,
-    );
+    const newExpenses = totalMoney
+      .reduce(
+        (acc, curr) => acc
+          + Number(curr.value) * Number(curr.exchangeRates[curr.currency].ask),
+        0,
+      )
+      .toFixed(2);
     if (expenses !== newExpenses) this.setState({ expenses: newExpenses });
   }
 
