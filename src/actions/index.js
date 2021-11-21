@@ -21,7 +21,7 @@ export const actionAddExpense = (obj) => async (dispatch) => {
   dispatch(actionExpenses(finalObject));
 };
 
-export const actionDeleteItem = (obj) => ({
+export const actionDeleteItem = (id) => ({
   type: DELETE_ITEM,
-  obj,
+  id,
 });

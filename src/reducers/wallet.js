@@ -5,13 +5,13 @@ const INITIAL_STATE = {
   expenses: [],
 };
 
-const wallet = (state = INITIAL_STATE, { type, expenses, obj }) => {
+const wallet = (state = INITIAL_STATE, { type, expenses, id }) => {
   switch (type) {
   case ADD_EXPENSE:
     delete expenses.currencies;
     return { ...state, expenses: [...state.expenses, expenses] };
   case DELETE_ITEM:
-    return { expenses: obj };
+    return { ...state, expenses: state.expenses.filter((curr) => curr.id !== id) };
   default:
     return state;
   }
