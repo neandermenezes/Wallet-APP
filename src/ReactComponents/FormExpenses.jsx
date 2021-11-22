@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionAddExpense } from '../actions';
+import { actionAddExpense, actionFinishEdit } from '../actions';
 import getCoins from '../services/api';
 
 class FormExpenses extends React.Component {
@@ -67,31 +67,34 @@ class FormExpenses extends React.Component {
           name="description"
           data-testid="description-input"
         />
-        <label htmlFor="moeda">
-          Moeda
-          <select
-            id="moeda"
-            name="currency"
-            onChange={ handleChange }
-            data-testid="currency-input"
-          >
-            {currencies === undefined ? null : currencies.map((curr) => (
-              <option key={ curr } data-testid={ curr } value={ curr }>
-                {curr}
-              </option>
-            ))}
-          </select>
-        </label>
+        {currencies.length && (
+          <label htmlFor="moeda">
+            Moeda
+            <select
+              id="moeda"
+              name="currency"
+              onChange={ handleChange }
+              data-testid="currency-input"
+            >
+              {currencies.map((curr) => (
+                <option key={ curr } data-testid={ curr } value={ curr }>
+                  {curr}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </>
     );
   }
 
   render() {
     const { method, tag } = this.state;
+    const { isEditing, finishEdit } = this.props;
     const { handleChange, submitForm } = this;
     return (
       <form>
-        { this.display() }
+        {this.display()}
         <select
           value={ method }
           name="method"
@@ -114,20 +117,35 @@ class FormExpenses extends React.Component {
           <option value="Transporte">Transporte</option>
           <option value="Saúde">Saúde</option>
         </select>
-        <button type="button" onClick={ submitForm }>
-          Adicionar despesa
-        </button>
+        {isEditing ? (
+          <button type="button" onClick={ () => finishEdit(this.state) }>
+            Editar despesa
+          </button>
+        ) : (
+          <button type="button" onClick={ submitForm }>
+            Adicionar despesa
+          </button>
+        )}
       </form>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  isEditing: state.wallet.isEditing,
+  editTarget: state.wallet.editTarget,
+  expenses: state.wallet.expenses,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   dispatchExpenses: (obj) => dispatch(actionAddExpense(obj)),
+  finishEdit: (obj) => dispatch(actionFinishEdit(obj)),
 });
 
 FormExpenses.propTypes = {
   dispatchExpenses: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
+  finishEdit: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(FormExpenses);
+export default connect(mapStateToProps, mapDispatchToProps)(FormExpenses);

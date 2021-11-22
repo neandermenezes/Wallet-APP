@@ -4,6 +4,8 @@ import getCoins from '../services/api';
 export const USER_LOGIN = 'USER_LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const BEGIN_EDIT = 'BEGIN_EDIT';
+export const FINISH_EDIT = 'FINISH_EDIT';
 
 export const actionUserLogin = (email) => ({
   type: USER_LOGIN,
@@ -24,4 +26,14 @@ export const actionAddExpense = (obj) => async (dispatch) => {
 export const actionDeleteItem = (id) => ({
   type: DELETE_ITEM,
   id,
+});
+
+export const actionBeginEdit = (editId) => ({
+  type: BEGIN_EDIT,
+  editId,
+});
+
+export const actionFinishEdit = (editedObj) => ({
+  type: FINISH_EDIT,
+  editedObj,
 });
