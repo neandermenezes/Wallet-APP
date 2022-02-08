@@ -23,7 +23,7 @@ Languages:<br>
 
 The following tools and frameworks were used in the construction of the project:<br>
     <img src="https://img.shields.io/badge/react%20-%23323330.svg?&style=for-the-badge&logo=react&logoColor=%23F7DF1E"/>
-    <img width="35"
+    <img width="35"/>
     <img src="https://img.shields.io/badge/react_router%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
     <img src ="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white"/>
     
