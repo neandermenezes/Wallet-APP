@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -51,26 +52,37 @@ class FormExpenses extends React.Component {
     const { handleChange } = this;
     return (
       <>
-        <input
-          type="number"
-          placeholder="valor"
-          name="value"
-          value={ value }
-          onChange={ handleChange }
-          data-testid="value-input"
-        />
-        <input
-          type="text"
-          placeholder="descrição"
-          value={ description }
-          onChange={ handleChange }
-          name="description"
-          data-testid="description-input"
-        />
+        <label className="form-expenses__label" htmlFor="value">
+          Valor
+          <input
+            id="value"
+            type="number"
+            placeholder="valor"
+            className="form-expenses__input"
+            name="value"
+            value={ value }
+            onChange={ handleChange }
+            data-testid="value-input"
+          />
+        </label>
+        <label className="form-expenses__label" htmlFor="description">
+          Descrição
+          <input
+            id="description"
+            type="text"
+            placeholder="descrição"
+            className="form-expenses__input"
+            value={ description }
+            onChange={ handleChange }
+            name="description"
+            data-testid="description-input"
+          />
+        </label>
         {currencies.length && (
-          <label htmlFor="moeda">
+          <label className="form-expenses__label" htmlFor="moeda">
             Moeda
             <select
+              className="form-expenses__select"
               id="moeda"
               name="currency"
               onChange={ handleChange }
@@ -93,36 +105,51 @@ class FormExpenses extends React.Component {
     const { isEditing, finishEdit } = this.props;
     const { handleChange, submitForm } = this;
     return (
-      <form>
+      <form className="form-expenses">
         {this.display()}
-        <select
-          value={ method }
-          name="method"
-          onChange={ handleChange }
-          data-testid="method-input"
-        >
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
-        </select>
-        <select
-          value={ tag }
-          name="tag"
-          onChange={ handleChange }
-          data-testid="tag-input"
-        >
-          <option value="Alimentação">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saúde">Saúde</option>
-        </select>
+        <label className="form-expenses__label" htmlFor="method">
+          Método
+          <select
+            htmlFor="method"
+            className="form-expenses__select"
+            value={ method }
+            name="method"
+            onChange={ handleChange }
+            data-testid="method-input"
+          >
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
+          </select>
+        </label>
+
+        <label className="form-expenses__label" htmlFor="tag">
+          Destino
+          <select
+            htmlFor="tag"
+            className="form-expenses__select"
+            value={ tag }
+            name="tag"
+            onChange={ handleChange }
+            data-testid="tag-input"
+          >
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
+          </select>
+        </label>
         {isEditing ? (
-          <button type="button" onClick={ () => finishEdit(this.state) }>
+          <button
+            className="form-expenses__btn"
+            type="button"
+            onClick={ () => finishEdit(this.state) }
+          >
             Editar despesa
           </button>
         ) : (
-          <button type="button" onClick={ submitForm }>
+          <button className="form-expenses__btn" type="button" onClick={ submitForm }>
             Adicionar despesa
           </button>
         )}

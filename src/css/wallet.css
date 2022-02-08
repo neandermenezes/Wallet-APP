@@ -1,0 +1,122 @@
+/* HEADER */
+
+.header {
+  align-items: center;
+  display: flex;
+  background-color: var(--brown-5);
+  padding: 1rem 2rem;
+  justify-content: space-between;
+}
+
+.header__identification {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.header__group {
+  align-items: center;
+  display: flex;
+}
+
+.header__total-field {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.header__currency {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* FORM EXPENSES */
+.form-expenses {
+  align-items: center;
+  background-color: var(--brown-5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  padding-bottom: 6rem;
+  width: 100%;
+}
+
+.form-expenses__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.form-expenses__input {
+  border: none;
+  border-radius: 5px;
+  margin-top: 2px;
+  padding: 1rem 2rem;
+}
+
+.form-expenses__select {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  margin-top: 2px;
+  padding: 1rem 2rem;
+}
+
+.form-expenses__btn {
+  align-self: flex-end;
+  background-color: var(--brown-1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 1.1rem 2rem;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: .5rem 1rem;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.table {
+  margin: auto;
+  padding: 6rem 2rem;
+  background-color: var(--brown-5);
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.table__header {
+  color: #121212;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+.table__expense {
+  color: #121212;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.table-btn {
+  padding: .4rem .8rem;
+  background-color: var(--brown-1);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-left: 5px;
+}

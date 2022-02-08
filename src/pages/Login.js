@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import { actionUserLogin } from '../actions/index';
-import BackgroundVideo from '../ReactComponents/Backgroundvideo';
+import '../css/login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -17,7 +17,6 @@ class Login extends React.Component {
       password: '',
       isButtonDisabled: true,
       redirect: false,
-      passwordValidated: false,
     };
   }
 
@@ -33,8 +32,8 @@ class Login extends React.Component {
     const minPasswordLength = 6;
 
     if (password.length >= minPasswordLength && email.includes('@' && '.com')) {
-      this.setState({ isButtonDisabled: false, passwordValidated: true });
-    } else this.setState({ isButtonDisabled: true, passwordValidated: false });
+      this.setState({ isButtonDisabled: false });
+    } else this.setState({ isButtonDisabled: true });
   }
 
   handleChange({ target: { name, value } }) {
@@ -42,10 +41,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, isButtonDisabled, redirect,
-      passwordValidated } = this.state;
+    const { email, password, isButtonDisabled, redirect } = this.state;
     const display = (
-      <div className="login">
+      <div className="container">
         <form action="#" className="form">
           <h1 className="heading-primary">Trybe Wallet</h1>
           <div className="form__group u-margin-top-big">
@@ -64,7 +62,7 @@ class Login extends React.Component {
               placeholder="Password"
               data-testid="password-input"
               type="password"
-              className={ passwordValidated ? 'form__input' : 'form__input--red' }
+              className="form__input"
               onChange={ this.handleChange }
               name="password"
               value={ password }
@@ -81,7 +79,6 @@ class Login extends React.Component {
             </button>
           </div>
         </form>
-        <BackgroundVideo />
       </div>
     );
     if (redirect) return <Redirect to="/carteira" />;

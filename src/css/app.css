@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+:root {
+
+  --color-black: #121212;
+
+  --color-grey: #7E7E7E;
+
+  --brown-1: #c38452;
+
+  --brown-2: #e3c099;
+
+  --brown-3: #6b3e2e;
+
+  --brown-4: #a1785c;
+
+  --brown-5: #ccb494;
+
+  --brown-6: #795644;
+}
+
+.container {
+  background-color: #121212;
+  min-height: 100vh;
+  position: relative;
+}

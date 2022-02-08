@@ -20,8 +20,6 @@ class Header extends React.Component {
               0,
             ).toFixed(2)}
           </p>
-        </div>
-        <div className="header__group">
           <p className="header__currency" data-testid="header-currency-field">
             BRL
           </p>
